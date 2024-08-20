@@ -1,0 +1,16 @@
+.form-group {
+    position: relative;
+  }
+  
+  .form-group .input-group-addon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 50%;
+  }
+  
+  .form-group .input-group-addon  {
+    margin-top: 20px; /* ajustement vertical de l'icône */
+    color: #2a76d3;
+    margin-right: 30px; /* couleur de l'icône */
+  }
