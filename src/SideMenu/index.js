@@ -9,7 +9,7 @@ import { Badge, Drawer, Image, List, Space, Typography } from "antd";
 import { Menu } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { LineChartOutlined } from '@ant-design/icons';
 import "../App.css";
 function SideMenu() {
   const location = useLocation();
@@ -32,7 +32,10 @@ function SideMenu() {
         }}
         selectedKeys={[selectedKeys]}
         items={[
-          <Image width={100} height={20}></Image>,
+          <Image width={100} height={20}>
+
+            
+          </Image>,
 
           {
             label: "Home\n",
@@ -52,7 +55,7 @@ function SideMenu() {
           {
             label: "Statistique",
             key: "/statistique",
-            icon: <UserOutlined />,
+            icon: <LineChartOutlined />,
             className: "nnn",
           },
           

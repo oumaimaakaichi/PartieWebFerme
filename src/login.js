@@ -59,7 +59,7 @@ const LoginReg = () => {
         return false;
       }
       console.log(email);
-      let response = await fetch("http://192.168.195.216:3000/login", {
+      let response = await fetch("http://192.168.244.216:3000/login", {
         method: "POST",
 
         headers: { "Content-Type": "application/json" },

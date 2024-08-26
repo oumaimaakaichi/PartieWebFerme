@@ -24,14 +24,14 @@
     height: 100vh;
 }
 .AppHeader{
-  background-color:rgb(208, 212, 214);
+  background-color:rgba(251, 251, 251, 0.799);
     height: 60px;
     display: flex;
     border-radius: 10px;
     justify-content: space-between;
     align-items: center;
     padding: 5px 20px 4px 12px;
-    border-bottom: 3px solid rgb(220, 220, 223);
+   
   
 
 }
@@ -53,15 +53,26 @@ border-top: 3px solid rgba(5, 1, 1, 0.15);
 }
 .SideMenu{
     height: 100%;
-    width: 260px;
+    width: 350px;
     
 }
-.SideMenuVertical{
-    height: 100%;
-   border-radius: 10px;
-    background-color:rgb(208, 212, 214);
-    justify-items: baseline;
+
+.MainContent {
+  flex: 1;
+  padding: 20px; /* Adjust padding as needed */
 }
+.SideMenuVertical {
+  height: 100%;
+
+  border-radius: 10px;
+  
+  background-image: url('../assets/c9d2eeb2725c2596100f460b0bd8ee1b.jpg'); /* Replace with the path to your image */
+  background-size: cover; /* Ensures the image covers the entire div */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  justify-items: baseline;
+}
+
 .PageContent{
     padding-left: 12px;
 }
@@ -78,10 +89,11 @@ border-top: 3px solid rgba(5, 1, 1, 0.15);
 }
 .nnn{
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: rgb(14, 14, 14);
-    font-weight: 100;
+    color: rgb(255, 255, 255);
+    font-weight: 200;
     font-size:medium;
     margin-top: 25px;
+    text-decoration-color: #7f5e8a;
     
    
 }
@@ -367,7 +379,7 @@ border-top: 3px solid rgba(5, 1, 1, 0.15);
    justify-items: center;
   }
   .head{
-    background-color: #d0e2eb;
+    background-color: #8baf9e;
     border: #ced0d1;
   }
   .heads{

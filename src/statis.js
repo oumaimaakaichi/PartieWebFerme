@@ -11,7 +11,7 @@ const FarmStatistics = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://192.168.195.216:3000/statistics");
+        const response = await fetch("http://192.168.244.216:3000/statistics");
         const result = await response.json();
         console.log("result", result);
         setData(result);

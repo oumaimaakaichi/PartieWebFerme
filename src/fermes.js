@@ -25,7 +25,7 @@ function Fermes() {
 
   async function getFermes() {
     try {
-      let result = await fetch("http://192.168.195.216:3000/AllFermes", {
+      let result = await fetch("http://192.168.244.216:3000/AllFermes", {
         method: "GET",
       });
       result = await result.json();
@@ -90,18 +90,19 @@ function Fermes() {
                   <table className="tablC" width="1000px">
                     <thead>
                       <tr className="head">
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Email</th>
-                        <th>Téléphone</th>
-                        <th>Cin</th>
-                        <th>Actions</th>
+                     
+                        <th style={{color:"white"}}>Nom</th>
+                        <th style={{color:"white"}}>Prénom</th>
+                        <th style={{color:"white"}}>Email</th>
+                        <th style={{color:"white"}}>Téléphone</th>
+                        <th style={{color:"white"}}>Cin</th>
+                        <th style={{color:"white"}}>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {filteredData.map((ferme) => (
                         <tr key={ferme._id}>
-                          <td
+                                           <td
                             style={{
                               textAlign: "center",
                               verticalAlign: "middle",
@@ -152,7 +153,7 @@ function Fermes() {
                               color="primary"
                               onClick={() => viewAccounts(ferme._id)}
                             >
-                              Voir
+                              Nouveau comptes
                             </Button>
                           </td>
                         </tr>
