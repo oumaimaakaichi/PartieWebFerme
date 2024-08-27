@@ -1,19 +1,47 @@
 import { BellFilled, MailOutlined, UserOutlined } from "@ant-design/icons";
-import { Badge, Drawer, Image, List, Popover, Space, Typography } from "antd";
+import { Badge, Drawer, List, Popover, Space, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import logo from './354dbc49db33ce3d657ecb44f8811f03-removebg-preview.png';
-import ad from "../logg.jpg";
+import { io } from 'socket.io-client';
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
+
+const socket = io('http://192.168.244.216:3000'); 
+
 function AppHeader() {
   const [comments, setComments] = useState([]);
   const [commentsOpen, setCommentsOpen] = useState(false);
-  const navigate = useNavigate();
+  const [notificationCount, setNotificationCount] = useState(0);
   const [user, setUser] = useState(null);
+  useEffect(() => {
+    console.log("Tentative de connexion au serveur Socket.io");
+    socket.on('connect', () => {
+        console.log('Connecté au serveur Socket.io');
+    });
+
+    socket.on('new-account-created', (notification) => {
+        console.log('Notification reçue:', notification);
+        setComments(prev => [...prev, notification]);
+        setNotificationCount(prev => prev + 1);
+    });
+
+    return () => {
+        socket.off('new-account-created');
+    };
+}, []);
 
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem('user')));
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    setUser(storedUser);
+
+    socket.on('new-account-created', (notification) => {
+      console.log('Notification received:', notification);
+      setComments(prev => [...prev, notification]);
+      setNotificationCount(prev => prev + 1); 
+    });
+
+    return () => {
+      socket.off('new-account-created');
+    };
   }, []);
 
   const profileContent = (
@@ -37,11 +65,16 @@ function AppHeader() {
   </div>
   );
 
+  const handleBellClick = () => {
+    setCommentsOpen(true);
+    setNotificationCount(0); 
+  };
+
   return (
     <div className="AppHeader">
 
       <Typography.Title>
-        <b style={{ color: 'black' , marginLeft:700 }}>
+        <b style={{ color: 'black', marginLeft: 700 }}>
           FarmManager
         </b>
       </Typography.Title>
@@ -52,9 +85,8 @@ function AppHeader() {
           <UserOutlined style={{ fontSize: '24px', cursor: 'pointer', margin: '0 10px' }} />
         </Popover>
         
-        
-        <Badge count={0}>
-          <BellFilled style={{ fontSize: '24px', cursor: 'pointer', margin: '0 10px' }} />
+        <Badge count={notificationCount}>
+          <BellFilled style={{ fontSize: '24px', cursor: 'pointer', margin: '0 10px' }} onClick={handleBellClick} />
         </Badge>
         <Badge count={0}>
           <MailOutlined style={{ fontSize: '24px', cursor: 'pointer', margin: '0 10px' }} />
@@ -62,14 +94,14 @@ function AppHeader() {
       </Space>
 
       <Drawer
-        title="Comments"
+        title="Notifications"
         open={commentsOpen}
         onClose={() => setCommentsOpen(false)}
         maskClosable
       >
         <List
           dataSource={comments}
-          renderItem={(item) => <List.Item>{item.body}</List.Item>}
+          renderItem={(item) => <List.Item>{item.message} - {new Date(item.timestamp).toLocaleString()}</List.Item>}
         />
       </Drawer>
     </div>
