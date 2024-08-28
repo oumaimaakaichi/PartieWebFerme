@@ -7,6 +7,7 @@ import PeopleIcon from "@material-ui/icons/People";
 import PetsIcon from "@material-ui/icons/Pets";
 import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
 import BusinessIcon from "@material-ui/icons/Business";
+import { Bar } from "react-chartjs-2"; 
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,8 +15,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   card: {
-    minWidth: 275,
-    margin: theme.spacing(2),
+    minWidth: 255,
+    margin: theme.spacing(3),
   },
   icon: {
     fontSize: 40,
@@ -23,12 +24,17 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: "bold",
   },
   count: {
     fontSize: 24,
     fontWeight: "bold",
+  },
+  chartContainer: {
+    marginTop: theme.spacing(4),
+    height:400,
+    width:1000
   },
 }));
 
@@ -38,10 +44,12 @@ function Dash() {
   const [employerCount, setEmployerCount] = useState(0);
   const [veterinaireCount, setVeterinaireCount] = useState(0);
   const [fermeCount, setFermeCount] = useState(0);
+  const [animalDataByYear, setAnimalDataByYear] = useState([]);
 
   useEffect(() => {
     fetchAnimalCount();
     fetchUserCounts();
+    fetchAnimalDataByYear(); 
   }, []);
 
   async function fetchAnimalCount() {
@@ -66,6 +74,30 @@ function Dash() {
     }
   }
 
+  async function fetchAnimalDataByYear() {
+    try {
+      const response = await fetch("http://192.168.244.216:3000/animals-by-year");
+      const data = await response.json();
+      setAnimalDataByYear(data);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des données des animaux par année :", error);
+    }
+  }
+
+  
+  const chartData = {
+    labels: animalDataByYear.map(item => item.year),
+    datasets: [
+      {
+        label: "Nombre d'Animaux",
+        data: animalDataByYear.map(item => item.totalAnimals),
+        backgroundColor: "rgba(75, 192, 192, 0.6)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return (
     <div className="ommm">
       <div className="App1">
@@ -73,15 +105,15 @@ function Dash() {
         <div className="SideMenuAndPageContent">
           <SideMenu />
           <div className={classes.root}>
-            <h2  style={{marginLeft:30}}><u>Informations</u></h2>
-          <br/><br/>
+            <h2 ><u>Informations</u></h2>
+            <br /><br />
             <Grid container spacing={4}>
-              {/* First Row */}<br/>
-              <Grid item xs={8} sm={4}>
+              {/* First Row */}<br />
+              <Grid item xs={12} sm={3}>
                 <Card className={classes.card}>
                   <CardContent>
                     <Grid container alignItems="center">
-                      <PetsIcon className={classes.icon} />&nbsp;&nbsp;&nbsp;&nbsp;
+                      <PetsIcon className={classes.icon} />
                       <div>
                         <Typography className={classes.title} color="textSecondary">
                           Total Animals
@@ -94,11 +126,11 @@ function Dash() {
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={3}>
                 <Card className={classes.card}>
                   <CardContent>
                     <Grid container alignItems="center">
-                      <PeopleIcon className={classes.icon} />&nbsp;&nbsp;&nbsp;&nbsp;
+                      <PeopleIcon className={classes.icon} />
                       <div>
                         <Typography className={classes.title} color="textSecondary">
                           Total Employers
@@ -112,11 +144,11 @@ function Dash() {
                 </Card>
               </Grid>
               {/* Second Row */}
-              <Grid item xs={8} sm={4}>
+              <Grid item xs={12} sm={3}>
                 <Card className={classes.card}>
                   <CardContent>
                     <Grid container alignItems="center">
-                      <LocalHospitalIcon className={classes.icon} />&nbsp;&nbsp;&nbsp;&nbsp;
+                      <LocalHospitalIcon className={classes.icon} />
                       <div>
                         <Typography className={classes.title} color="textSecondary">
                           Total Veterinarians
@@ -129,11 +161,11 @@ function Dash() {
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid item xs={8} sm={4}>
+              <Grid item xs={12} sm={3}>
                 <Card className={classes.card}>
                   <CardContent>
                     <Grid container alignItems="center">
-                      <BusinessIcon className={classes.icon} />&nbsp;&nbsp;&nbsp;&nbsp;
+                      <BusinessIcon className={classes.icon} />
                       <div>
                         <Typography className={classes.title} color="textSecondary">
                           Total Farms
@@ -147,6 +179,12 @@ function Dash() {
                 </Card>
               </Grid>
             </Grid>
+        
+            <div className={classes.chartContainer}>
+              <h3><u>Nombre d'Animaux par Année</u></h3>
+              <br/>
+              <Bar data={chartData} style={{marginLeft:140}} />
+            </div>
           </div>
         </div>
       </div>
