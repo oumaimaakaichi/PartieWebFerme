@@ -54,7 +54,7 @@ function Dash() {
 
   async function fetchAnimalCount() {
     try {
-      const response = await fetch("http://192.168.244.216:3000/total-animals");
+      const response = await fetch("http://192.168.177.216:3000/total-animals");
       const data = await response.json();
       setAnimalCount(data.totalAnimals);
     } catch (error) {
@@ -64,7 +64,7 @@ function Dash() {
 
   async function fetchUserCounts() {
     try {
-      const response = await fetch("http://192.168.244.216:3000/total-users");
+      const response = await fetch("http://192.168.177.216:3000/total-users");
       const data = await response.json();
       setEmployerCount(data.totalEmployeurs);
       setVeterinaireCount(data.totalVeterinaires);
@@ -76,7 +76,7 @@ function Dash() {
 
   async function fetchAnimalDataByYear() {
     try {
-      const response = await fetch("http://192.168.244.216:3000/animals-by-year");
+      const response = await fetch("http://192.168.177.216:3000/animals-by-year");
       const data = await response.json();
       setAnimalDataByYear(data);
     } catch (error) {

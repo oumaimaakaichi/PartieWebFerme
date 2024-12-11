@@ -66,7 +66,7 @@ border-top: 3px solid rgba(5, 1, 1, 0.15);
 
   border-radius: 10px;
   
-  background-image: url('../assets/c9d2eeb2725c2596100f460b0bd8ee1b.jpg'); /* Replace with the path to your image */
+  background-image: url('../assets/io.jpg'); /* Replace with the path to your image */
   background-size: cover; /* Ensures the image covers the entire div */
   background-position: center; /* Centers the image */
   background-repeat: no-repeat; /* Prevents the image from repeating */
@@ -90,10 +90,12 @@ border-top: 3px solid rgba(5, 1, 1, 0.15);
 .nnn{
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: rgb(255, 255, 255);
-    font-weight: 200;
+    font-weight: 400;
     font-size:medium;
     margin-top: 25px;
+    
     text-decoration-color: #7f5e8a;
+    margin-bottom: 50;
     
    
 }

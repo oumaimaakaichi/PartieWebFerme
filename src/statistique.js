@@ -11,7 +11,7 @@ const FarmStatistics = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://192.168.244.216:3000/statistics");
+        const response = await fetch("http://192.168.177.216:3000/statistics");
         const result = await response.json();
         console.log("result", result);
         setData(result);
@@ -62,11 +62,13 @@ const FarmStatistics = () => {
         <SideMenu />
         <div>
           <br />
+          <h1 style={{marginLeft:40 , fontSize:"18px"}}><u>Statistique</u></h1>
           <br />
+
           <Bar
             data={chartData}
             options={options}
-            style={{ width: "1000px", height: "500px" }}
+            style={{ width: "1000px", height: "500px" , marginLeft:60 }}
           />
         </div>
       </div>

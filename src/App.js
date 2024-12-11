@@ -6,7 +6,7 @@ import LoginReg from "./login";
 import Dash from './dashboard';
 import Fermes from './fermes';
 import Accounts from './account';
-import FarmStatistics from './statis'
+import FarmStatistics from './statistique'
 function App() {
   return (
     <BrowserRouter>

@@ -25,7 +25,7 @@ function Fermes() {
 
   async function getFermes() {
     try {
-      let result = await fetch("http://192.168.244.216:3000/AllFermes", {
+      let result = await fetch("http://192.168.177.216:3000/AllFermes", {
         method: "GET",
       });
       result = await result.json();

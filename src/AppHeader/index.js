@@ -5,7 +5,7 @@ import { io } from 'socket.io-client';
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
 
-const socket = io('http://192.168.244.216:3000'); 
+const socket = io('http://192.168.177.216:3000'); 
 
 function AppHeader() {
   const [comments, setComments] = useState([]);

@@ -13,7 +13,7 @@ function Accounts() {
    
     const fetchOuvriers = async () => {
       try {
-        const response = await fetch(`http://192.168.244.216:3000/Compte-by-proprietaire/${id}`);
+        const response = await fetch(`http://192.168.177.216:3000/Compte-by-proprietaire/${id}`);
         const data = await response.json();
         setOuvriers(data);
       } catch (error) {
@@ -24,7 +24,7 @@ function Accounts() {
    
     const fetchVeterinaires = async () => {
       try {
-        const response = await fetch(`http://192.168.244.216:3000/Compte-by-proprietaireV/${id}`);
+        const response = await fetch(`http://192.168.177.216:3000/Compte-by-proprietaireV/${id}`);
         const data = await response.json();
         setVeterinaires(data);
       } catch (error) {
@@ -38,8 +38,8 @@ function Accounts() {
 
   const handleCreateCompte = async (compteId, type) => {
     const apiUrl = type === 'ouvrier'
-      ? `http://192.168.244.216:3000/deplacer-compte/${compteId}`
-      : `http://192.168.244.216:3000/deplacer-compteV/${compteId}`;
+      ? `http://192.168.177.216:3000/deplacer-compte/${compteId}`
+      : `http://192.168.177.216:3000/deplacer-compteV/${compteId}`;
 
     try {
       const response = await fetch(apiUrl, {
